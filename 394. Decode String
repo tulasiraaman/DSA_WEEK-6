@@ -1,0 +1,33 @@
+class Solution {
+    public String decodeString(String s) {
+        Stack<String> stack = new Stack<>(); // initialize the string stack
+
+        for(char ch: s.toCharArray()){
+            if(ch != ']'){
+                stack.push(String.valueOf(ch)); //convert char to string to store in stack
+            }else{
+                StringBuilder temp = new StringBuilder();
+                while(!stack.peek().equals("[")){ //'remove string until not equals to '['
+                    temp.insert(0, stack.pop()); //insert at the front
+                }
+                stack.pop(); //remove '['
+
+                StringBuilder num = new StringBuilder();
+                //here, check string of first letter is digit. eg."8"
+                while(!stack.isEmpty() && Character.isDigit(stack.peek().charAt(0))){
+                    num.insert(0, stack.pop()); 
+                }
+
+                String repeated = temp.toString().repeat(Integer.parseInt(num.toString()));
+                stack.push(repeated);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for(String str: stack){
+            result.append(str);
+        }
+        
+        return result.toString();
+    }
+}
