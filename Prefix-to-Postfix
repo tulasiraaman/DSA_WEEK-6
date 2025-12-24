@@ -1,0 +1,28 @@
+// User function Template for Java
+
+class Solution {
+    static String preToPost(String pre_exp) {
+        // code here
+        Stack<String> stack = new Stack<>();
+        
+        for(int i = pre_exp.length()-1;i >= 0;i--){
+            char ch = pre_exp.charAt(i);
+            if(Character.isLetter(ch)){
+                stack.push(String.valueOf(ch));
+            }else{
+                if(!stack.isEmpty()){
+                    String op1 = stack.pop();
+                    String op2 = stack.pop();
+                    
+                    stack.push(op1 + op2 + ch);
+                }
+            }
+        }
+        return stack.pop();
+    }
+}
+// The logic is: scan the prefix expression right‑to‑left,
+// push operands, and for each operator pop two operands, 
+// combine them as operand1 + operand2 + operator, 
+// then push back until the final postfix remains.
+// TC - O(n), SC - O(n).
