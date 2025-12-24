@@ -1,0 +1,27 @@
+class Solution {
+    public void sortStack(Stack<Integer> st) {
+        // code here
+        if (!st.isEmpty()) {
+            // Step 1: Pop top
+            int top = st.pop();
+            
+            // Step 2: Sort remaining stack
+            sortStack(st);
+            
+            // Step 3: Insert top back in sorted order
+            insertInSortedOrder(st, top);
+        }
+    }
+    
+    private static void insertInSortedOrder(Stack<Integer> st, int x) {
+        if (st.isEmpty() || st.peek() <= x) {
+            st.push(x);
+            return;
+        }
+        
+        int top = st.pop();
+        insertInSortedOrder(st, x);
+        st.push(top);
+    }
+
+}
