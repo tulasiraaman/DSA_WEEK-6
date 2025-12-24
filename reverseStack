@@ -1,0 +1,27 @@
+class Solution {
+    
+    private static void insertAtBottom(Stack<Integer> st, int x){
+        if(st.isEmpty()){
+            st.push(x);
+            return;
+        }
+        int top = st.pop();
+        insertAtBottom(st, x);
+        st.push(top);
+    }
+    
+    public static void reverseStack(Stack<Integer> st) {
+        // code here
+        if (st.isEmpty()) return;
+        int top = st.pop();
+        reverseStack(st);
+        insertAtBottom(st, top);
+        // int[] arr = new int[n];
+        // for(int i = 0;i < n;i++){
+        //     arr[i] = st.pop();
+        // }
+        // for(int m: arr){
+        //     st.push(m);
+        // }
+    }
+}//Tc - O(n^2), SC - O(n)
